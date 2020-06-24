@@ -10,11 +10,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-BASEDIR = os.path.abspath(os.path.dirname(__file__))
+# Database config
 SQL_ALCH_URL = "SQLALCHEMY_DATABASE_URI"
-
-app.config[SQL_ALCH_URL] = "sqlite:///" + os.path.join(BASEDIR, 'data.sqlite')
+app.config[SQL_ALCH_URL] = "sqlite:///:memory:"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
 app.config['SECRET_KEY'] = 'you-will-never-guess'
 app.config['UPLOAD_FOLDER'] = "/uploads"
 DB = SQLAlchemy(app)

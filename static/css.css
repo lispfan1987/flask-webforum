@@ -7,7 +7,8 @@ html, body {
 body {
 	color: #222;
 	font-family: 'Helvetica Neue', 'Arial', sans-serif;
-    line-height: 1.5;
+	line-height: 1.5;
+	font-size:1.5rem;
 }
 
 button,
@@ -45,7 +46,7 @@ input[type='submit']:active {
 }
 
 .container {
-	max-width: 720px;
+	max-width: 95%;
 	margin: 0 auto;
    	word-wrap: break-word;
         word-break: break-all;
@@ -74,6 +75,19 @@ input[type='submit']:active {
 	content: '';
 }
 
+#submit {
+	width:100%;
+}
+
+#text_content {
+	border-radius: 1rem;
+	padding:1rem;
+	max-width:95%;
+	border:0.1rem rgba(0, 0, 0, 0.144) solid;
+	background-color:rgb(245, 245, 245);
+	font-size:2rem;
+}
+
 .logo {
 	margin: 0;
 	display: block;
@@ -92,13 +106,20 @@ input[type='submit']:active {
 	display: inline;
 	margin: 0;
 
-	font-size: 1rem;
+	font-size: 1.2rem;
+}
+
+.post:nth-child(even) {
+	background-color:rgb(245, 245, 245);
 }
 
 .post {
+	
 	box-sizing: border-box;
-
+	border-radius:10px;
 	margin: 2rem 0;
+	padding:3%;
+
 }
 
 .post-content {
@@ -109,18 +130,22 @@ input[type='submit']:active {
 .button-row {
 	text-align: right;
 }
-
+.metaInfo {
+	padding-left:1%;
+	background-color:rgb(255, 255, 255);
+	max-width:50%;
+	border:0.1rem rgb(158, 158, 158) solid;
+	border-radius:15px;
+	margin-bottom:2%;
+}
 .badge {
-	margin-left: .5rem;
-
-	padding: .0625rem .5rem;
+	margin-left: .1rem;	
 	vertical-align: middle;
-
-	border: .75px black solid;
 	border-radius: 2px;
-
-	font-size: .75rem;
+	font-size: 1rem;
 	font-weight: 300;
+	color:rgb(148, 148, 148);
+	
 }
 
 .seamless-text-input {

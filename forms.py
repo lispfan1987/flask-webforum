@@ -13,5 +13,5 @@ class PostForm(FlaskForm):
         Post form to get data from the user
     '''
     text_content = TextAreaField('Type your message here...',
-                               validators=[DataRequired(), Length(min=1, max=150)])
+                               validators=[DataRequired(), Length(min=1, max=640)])
     submit = SubmitField('Post')

@@ -9,11 +9,11 @@
 </head>
 
 	<body>
-		
+		<a href="{{url_for('reset')}}">reset</a>
 		<div class="container">
 			
 			<header class="main-header">
-				<img src="/static/fwftxtboard.webp" class="logo" alt="Flask Web Forum"/>
+				<img src="/static/fwftxtboard.webp" width="150px" class="logo" alt="Flask Web Forum"/>
 			</header>
 
 			<section class="main-section">
@@ -42,9 +42,11 @@
 						<header class="post-header">
 							
 							<div class="metaInfo">
-								<h2 class="post-title">post #<a href="#{{ comment.id }}">{{ comment.id }} </a> </h2>
+								
+								<h2 class="post-title">post #<a href="#{{ comment.id }}">{{ comment.id }}</a></h2>
 							{% if myIp == comment.ipHash %}
 								{{ ' <span class="badge">[Your Post]</span>'|safe}}
+								<a href="{{url_for('deleteId',postId=comment.id)}}">delete</a>
 							{% endif %}
 								<span class="badge">| {{ comment.ipHash  }} |</span> 
 								<span class="badge">{{ comment.timestamp  }}</span>
@@ -58,7 +60,10 @@
 			</section>
 
 		</div>
-
+	<script>
+		document.getElementsByClassName("seamless-text-input")[0].innerHTML= ""
+		if ( window.history.replaceState ) { window.history.replaceState( null, null, window.location.href ); }
+	</script>
 	</body>
 
 </html>

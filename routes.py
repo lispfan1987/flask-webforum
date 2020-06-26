@@ -3,16 +3,13 @@ from forms import *
 from logic import *
 
 # Render the main screen
-@app.route('/', methods=['GET', 'POST'])
-def posts():
-    '''
-        Displays the landing page
-    '''
-    post_form = PostForm()
-    request_ip = "test" # request.environ['HTTP_X_FORWARDED_FOR']
+@app.route('/', methods=['GET','POST'])
+def postsPost():
 
-    # create an IP hash to ID users in our database
-    ip_hash = hashlib.sha224(bytes(str(request_ip), "utf-8")).hexdigest()[-16:]
+    post_form = PostForm()
+    request_ip = request.environ['HTTP_X_FORWARDED_FOR']
+    
+    ip_hash = createIdHash(request_ip)
     sys_time = "%s" % strftime('%I:%M:%S %p')
 
     if post_form.validate_on_submit():
@@ -33,3 +30,25 @@ def posts():
     posted_data = {"posted": request.method == 'POST', "allposts": reversed(all_posts)}
     
     return render_template("index.html", post=posted_data, form=post_form, myIp=ip_hash)
+
+
+@app.route('/reset')
+def reset():
+    DB.drop_all()
+    DB.create_all()
+    return redirect(url_for("postsPost"))
+
+
+@app.route('/delete/<int:postId>')
+def deleteId(postId):
+
+    request_ip = request.environ['HTTP_X_FORWARDED_FOR']
+    ip_hash = createIdHash(request_ip)
+
+    toDeletePost = Post.query.get(postId)
+    
+    if toDeletePost and ip_hash == toDeletePost.ipHash:
+        DB.session.delete(toDeletePost)
+        DB.session.commit()
+    
+    return redirect(url_for("postsPost"))
